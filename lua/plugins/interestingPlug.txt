@@ -1,0 +1,6 @@
+
+## STATUS LINES
+3- lualine-ext 
+2- statusline.lua
+1.slimline.nvim
+nougat.nvim
