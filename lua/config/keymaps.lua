@@ -1,7 +1,5 @@
 
--- Keymap of Nvim Tree Toggle
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
-
+ 
 -- Keymap of Oil
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
