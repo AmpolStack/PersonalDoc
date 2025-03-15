@@ -1,0 +1,69 @@
+
+# Kanagawa Dragon inspired Alacritty configuration
+[window]
+padding = { x = 20, y = 20}
+option_as_alt = "Both"
+opacity = 0.98
+startup_mode = "Maximized"  # Hace que la terminal siempre se abra maximizada
+
+[colors.primary]
+# background = "#1f1f28"  # Fondo oscuro (sumiInk2)
+background = "#262624" 
+foreground = "#DCD7BA"  # Texto principal (oldWhite)
+
+[colors.cursor]
+#cursor = "#f87070"      # Un rojo vibrante (rubyRed)
+cursor = "#3a3a40"   # Un amarillo más calido, tirando a transparente
+text = "#DCD7BA"        # Texto del cursor (oldWhite)
+
+[colors.selection]
+background = "#3a3a40"  # Un gris oscuro para selección
+text = "#DCD7BA"        # Texto seleccionado
+
+[colors.normal]
+black   = "#16161D"     # sumiInk1: muy oscuro
+red     = "#f87070"     # rubyRed: para errores o acentos
+green   = "#A3BE8C"     # springGreen: para éxitos
+yellow  = "#E6B99D"     # Beige suave: para advertencias
+blue    = "#7FB4CA"     # dragonBlue: información
+magenta = "#d18fa4"     # dragonPink: para destacados
+cyan    = "#9CCFD8"     # crystalBlue: enlaces o resaltes
+white   = "#DCD7BA"     # oldWhite: texto principal
+
+[colors.bright]
+black   = "#363646"     # sumiInk4: gris medio
+red     = "#f87070"
+green   = "#A3BE8C"
+yellow  = "#E6B99D"
+blue    = "#7FB4CA"
+magenta = "#d18fa4"
+cyan    = "#9CCFD8"
+white   = "#DCD7BA"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#F5A191"       # Color adicional (por ejemplo, un toque de melocotón)
+
+[[colors.indexed_colors]]
+index = 17
+color = "#E29ECA"       # Color adicional (un rosa suave)
+
+[font]
+size = 14
+
+[font.normal]
+family = "FiraCode Nerd Font Mono"
+
+[env]
+TERM = "xterm-256color"
+
+[terminal.shell]
+program = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+args = ["-NoLogo"]  
+
+[keyboard]
+bindings = [
+{ key = "C", mods = "Control|Shift", action = "Copy" },
+{ key = "V", mods = "Control", action = "Paste" },
+]
+

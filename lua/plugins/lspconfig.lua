@@ -52,6 +52,22 @@ return
 
     -- Configuración del servidor de C# (csharp_ls)
     lspconfig.csharp_ls.setup({
+
+	    on_attach = function(client, bufnr)
+    local opts = { noremap = true, silent = true, buffer = bufnr }
+
+    -- Navegación y documentación usando LSP
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)          -- Muestra documentación al hacer hoover
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+
+    -- Integración con Telescope: para buscar definiciones
+    vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, opts)
+  end,
+  flags = {
+    debounce_text_changes = 150,
+  },
       capabilities = capabilities,  -- Integra las capacidades de autocompletado
       -- Puedes agregar más configuraciones específicas para C# aquí si lo deseas
     })

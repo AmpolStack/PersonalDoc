@@ -3,13 +3,12 @@ return {
 	config = function()
 		local alpha = require("alpha")
 		local dashboard = require("alpha.themes.dashboard")
-
 		local button = dashboard.button
 
 		local logos = require("plugins.logos")
 		dashboard.section.header ={
 			type = "text",
-			val = logos.userme,
+			val = logos.kraken,
 			opts = { hl = "MyLogoHighlight", position = "center" }
 		}
 
@@ -28,7 +27,11 @@ return {
 				{ type = "padding", val = 1},
 				button("    w    ", "  Recent File", ":Telescope oldfiles<CR>"),
 				{ type = "padding", val = 1},
-				button("    q    ", "󰩈  File", ":qa<cr>"),
+				button("    c    ", "  Go To Nvim Config", ":e ~\\AppData\\Local\\nvim <CR>"),
+				{ type = "padding", val = 1},
+				button("    a    ", "󱚟  Got To Alacritty Config", ":e ~\\AppData\\Roaming\\alacritty <CR>"),
+				{ type = "padding", val= 1},
+				button("    q    ", "󰩈  Quit", ":qa<cr>"),
 			},
 			opts = { hl = "AlphaButtons", hl_shortcut = "AlphaShortcut"}
 		}

@@ -13,7 +13,7 @@ require("lazy").setup({
     { import = "plugins.oil"},
     { import = "plugins.cmp" },
     { import = "plugins.toggleterm"},
---    { import = "plugins.none-ls"},
+    { import = "plugins.none-ls"},
     { import = "plugins.alpha"},
     { import = "plugins.visual-multi" },
   },
