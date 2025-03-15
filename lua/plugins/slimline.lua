@@ -5,10 +5,10 @@ return
 	},
 	config = function()
 		require('slimline').setup {
-			bold = true, -- makes primary parts and mode bold
+			bold = false, -- makes primary parts and mode bold
 			verbose_mode = true, -- Mode as single letter or as a word
 			style = 'bg', -- or "fg". Whether highlights should be applied to bg or fg of components
-			mode_follow_style = true, -- Whether the mode color components should follow the style option
+			mode_follow_style = false, -- Whether the mode color components should follow the style option
 			workspace_diagnostics = false, -- Whether diagnostics should show workspace diagnostics instead of current buffer
 			components = { -- Choose components and their location
 				left = {
@@ -17,9 +17,6 @@ return
 					"git"
 				},
 				center = {
-					function()
-						return "Amapola Profile"
-					end
 				},
 				right = {
       					"diagnostics",
@@ -30,8 +27,8 @@ return
 			spaces =
 			{
 				components = '-', -- string between components
-    				left = ' ', -- string at the start of the line
-    				right = ' ', -- string at the end of the line
+    				left = '', -- string at the start of the line
+    				right = '', -- string at the end of the line
   			},
   			sep =
 			{

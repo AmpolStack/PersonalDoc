@@ -1,11 +1,8 @@
 return
-{
-  	"rebelot/kanagawa.nvim",
-	lazy = false,
-	priority = 1000,
+({
+	"rebelot/kanagawa.nvim",
 	config = function()
 		require("kanagawa").setup({})
 		vim.cmd("colorscheme kanagawa-dragon")
-	end
-
-}
+	end,
+})
