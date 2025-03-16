@@ -5,10 +5,10 @@ return {
 		local dashboard = require("alpha.themes.dashboard")
 		local button = dashboard.button
 
-		local logos = require("plugins.logos")
+		local logos = require("config.logos")
 		dashboard.section.header ={
 			type = "text",
-			val = logos.kraken,
+			val = logos.userme,
 			opts = { hl = "MyLogoHighlight", position = "center" }
 		}
 

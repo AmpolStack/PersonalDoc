@@ -1,6 +1,5 @@
 
 local c = require("config.colors")
-
 local show_transparent_bg = true
 if show_transparent_bg == true then
 	-- IF U ARE LOOKING TO PUT THE BACKGROUND TRANSPARENT, APPLY THIS
