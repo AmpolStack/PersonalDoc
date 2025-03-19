@@ -14,7 +14,7 @@ return
         	dependencies = { "neovim/nvim-lspconfig" },
         	config = function()
             		require("mason-lspconfig").setup({
-                	ensure_installed = { "ts_ls", "lua_ls", "jsonls", "marksman" }
+                	ensure_installed = { "csharp_ls", "ts_ls", "lua_ls", "jsonls", "marksman"}
             	})
         	end
 	},
@@ -29,30 +29,40 @@ return
 			local lspconfig = require("lspconfig")
 			-- declare a default capabilities from cmp-nvim
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+		vim.diagnostic.config({
+      			virtual_text = true,   -- Muestra mensajes de error directamente en el buffer
+      			signs = true,          -- Muestra signos en el margen
+      			underline = true,      -- Subraya el texto con errores
+      			update_in_insert = true, -- Actualiza diagnósticos incluso en modo inserción
+      			severity_sort = false, -- No ordena por severidad
+    		})
 
-			vim.diagnostic.config({
-      				virtual_text = true,   -- Muestra mensajes de error directamente en el buffer
-      				signs = true,          -- Muestra signos en el margen
-      				underline = true,      -- Subraya el texto con errores
-      				update_in_insert = true, -- Actualiza diagnósticos incluso en modo inserción
-      				severity_sort = false, -- No ordena por severidad
-    })
-
-
-			-- Typescript & Javascript Server
+    		local border = {
+  			{ "", "FloatBorder" },
+			{ "▔", "FloatBorder" },
+			{ "🭾", "FloatBorder" },
+	      		{ "▕", "FloatBorder" },
+	      		{ "🭿", "FloatBorder" },
+	      		{ "▁", "FloatBorder" },
+	      		{ "🭼", "FloatBorder" },
+	      		{ "▏", "FloatBorder" },
+      		}
+		local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview                                  
+    		-- Sobrescribimos la función para que utilice por defecto nuestro borde personalizado                       
+     vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)                                  
+       opts = opts or {}                                                                                         
+       opts.border = opts.border or border                                                                       
+       return orig_util_open_floating_preview(contents, syntax, opts, ...)                                       
+      end			-- Typescript & Javascript Server
 			 lspconfig.ts_ls.setup({
         		 	cmd = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" },
-        			on_attach = function(client, bufnr)
-          				-- Habilitar formato con null-ls en lugar de tsserver
-          				client.server_capabilities.documentFormattingProvider = false
-        			end,
+          			capabilities = capabilities,
         			settings = {
           				typescript = {
             					inlayHints = { includeInlayParameterNameHints = "all" },
           				},
         			},
       			})
-
 			-- Lua Server
 			lspconfig.lua_ls.setup{
 				cmd = { "C:/Users/htrsa/AppData/Local/nvim-data/mason/packages/lua-language-server/bin/lua-language-server.exe" },
@@ -63,6 +73,13 @@ return
 						workspace = { library = vim.api.nvim_get_runtime_file("",true)}
 					}
 				}
+			}
+
+
+			-- C# Server
+			lspconfig.csharp_ls.setup{
+				cmd = {"C:/Users/htrsa/AppData/Local/nvim-data/mason/packages/csharp-language-server/csharp-ls.exe"},
+				capabilities = capabilities,
 			}
 
 			-- JSON Server
@@ -79,10 +96,17 @@ return
 			lspconfig.marksman.setup{
 				cmd = {"C:/Users/htrsa/AppData/Local/nvim-data/mason/packages/marksman/marksman.exe"}
 			}
-
-			    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Ir a definición" })
-    			    vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Mostrar documentación" })
-    			    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Renombrar símbolo" })
+			 on_attach = function(client, bufnr)
+     local opts = { noremap = true, silent = true, buffer = bufnr }
+ 
+     -- Navegación y documentación usando LSP
+     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)          -- Muestra documentación al hacer hoover
+     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+         vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, opts)
+     end
+     -- Integración con Telescope: para buscar definiciones
 		end
 	},
 

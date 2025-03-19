@@ -8,9 +8,10 @@ return {
 		local logos = require("config.logos")
 		dashboard.section.header ={
 			type = "text",
-			val = logos.userme,
+			val = logos.hidra,
 			opts = { hl = "MyLogoHighlight", position = "center" }
 		}
+		
 
 		dashboard.section.subtitle = {
 			type = "text",

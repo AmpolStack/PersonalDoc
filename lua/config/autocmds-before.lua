@@ -1,6 +1,6 @@
 
 local c = require("config.colors")
-local show_transparent_bg = true
+local show_transparent_bg = false
 if show_transparent_bg == true then
 	-- IF U ARE LOOKING TO PUT THE BACKGROUND TRANSPARENT, APPLY THIS
 	vim.api.nvim_set_hl(0, "SlimlineModeNormal", { bg = c.single_blue, fg = c.black_yellow, bold = true })

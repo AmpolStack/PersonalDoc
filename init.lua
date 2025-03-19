@@ -10,6 +10,7 @@ vim.g.maplocalleader = "\\"
 require("config.autocmds-before")
 
 require("config.lazy-bootstrap")
+-- require("config.lazy-config")
 require("config.options")
 
 

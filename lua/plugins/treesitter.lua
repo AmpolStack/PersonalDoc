@@ -6,9 +6,10 @@ return
 	config = function()
 		require("nvim-treesitter.configs").setup(
 		{
-			ensure_installed = {"lua", "typescript"},
+			ensure_installed = {"lua", "typescript", "c_sharp"},
 			indent = { enabled = true},
 			higthligth = {enabled = true},
+			sync_install = false,
 		})
 	end
 }
