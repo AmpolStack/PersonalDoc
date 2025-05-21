@@ -2,6 +2,7 @@ return {
   -- LSPs Manager Configuration
   {
     "williamboman/mason.nvim",
+    build = ":MasonUpdate",
     config = function()
       require("mason").setup()
     end,
@@ -10,10 +11,17 @@ return {
   -- Mason-LspConfig: Bridges Mason and lspconfig
   {
     "williamboman/mason-lspconfig.nvim",
-    dependencies = { "neovim/nvim-lspconfig" },
+    dependencies = { "mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "csharp_ls", "ts_ls", "lua_ls", "jsonls", "marksman", "pyright", "angularls", "html", "cssls" },
+        -- servidores que quieres asegurar instalados
+        ensure_installed = {
+          "csharp_ls", "ts_ls", "lua_ls", "jsonls",
+          "marksman", "pyright", "angularls", "html", "cssls"
+        },
+        automatic_installation = true,
+        -- <<< Añade esta línea para DESHABILITAR el feature roto >>>
+        automatic_enable = false,
       })
     end,
   },
@@ -28,16 +36,16 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
-      local lspconfig = require("lspconfig")
+      local lspconfig    = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- Global diagnostic config
       vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
-        underline = true,
-        update_in_insert = true,
-        severity_sort = false,
+        virtual_text    = true,
+        signs           = true,
+        underline       = true,
+        update_in_insert= true,
+        severity_sort   = false,
       })
 
       -- Custom border for floating windows
@@ -65,42 +73,42 @@ return {
 
       -- TypeScript & JavaScript
       lspconfig.ts_ls.setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" },
+        cmd          = { vim.fn.stdpath("data") .. "/mason/bin/typescript-language-server", "--stdio" },
         capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
+        on_attach    = on_attach,
+        settings     = {
           typescript = { inlayHints = { includeInlayParameterNameHints = "all" } },
         },
       })
 
       -- Lua
       lspconfig.lua_ls.setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
+        cmd          = { vim.fn.stdpath("data") .. "/mason/bin/lua-language-server" },
         capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
+        on_attach    = on_attach,
+        settings     = {
           Lua = {
-            runtime = { version = "LuaJIT" },
+            runtime   = { version = "LuaJIT" },
             diagnostics = { globals = { "vim" } },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            workspace  = { library = vim.api.nvim_get_runtime_file("", true) },
           },
         },
       })
 
       -- C#
       lspconfig.csharp_ls.setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/csharp-ls" },
+        cmd          = { vim.fn.stdpath("data") .. "/mason/bin/csharp-ls" },
         capabilities = capabilities,
-        on_attach = on_attach,
+        on_attach    = on_attach,
       })
 
       -- JSON
       lspconfig.jsonls.setup({
         capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
+        on_attach    = on_attach,
+        settings     = {
           json = {
-            schemas = require("schemastore").json.schemas(),
+            schemas  = require("schemastore").json.schemas(),
             validate = { enable = true },
           },
         },
@@ -108,19 +116,19 @@ return {
 
       -- Markdown
       lspconfig.marksman.setup({
-        cmd = { vim.fn.stdpath("data") .. "/mason/bin/marksman" },
+        cmd       = { vim.fn.stdpath("data") .. "/mason/bin/marksman" },
         on_attach = on_attach,
       })
 
       -- Python
       lspconfig.pyright.setup({
         capabilities = capabilities,
-        on_attach = on_attach,
-        settings = {
+        on_attach    = on_attach,
+        settings     = {
           python = {
             analysis = {
-              typeCheckingMode = "basic",
-              autoSearchPaths = true,
+              typeCheckingMode     = "basic",
+              autoSearchPaths      = true,
               useLibraryCodeForTypes = true,
             },
           },

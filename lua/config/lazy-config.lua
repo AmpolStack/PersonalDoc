@@ -4,6 +4,7 @@ require("lazy").setup({
     --
     { import = "plugins.lsp"},
     { import = "plugins.completions"},
+    { import = "pluggins.cmp"},
     { import = "plugins.treesitter" },
     { import = "plugins.kanagawa"},
     { import = "plugins.telescope" },
@@ -11,6 +12,11 @@ require("lazy").setup({
     { import = "plugins.dev-icons"},
     { import = "plugins.oil"},
     { import = "plugins.alpha"},
+    { import = "plugins.barbar"},
+    { import = "plugins.lazygit-config"},
+    { import = "plugins.editorconfig"},
+    { import = "plugins.toggle-term"},
+    { import = "plugins.none-ls"},
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
