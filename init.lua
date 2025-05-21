@@ -7,14 +7,17 @@ vim.o.clipboard = "unnamedplus"
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
-require("config.autocmds-before")
+
+-- require("config.autocmds-before")
+
 
 require("config.lazy-bootstrap")
--- require("config.lazy-config")
+require("config.lazy-config")
 require("config.options")
 
 
-require('config.autocmds-after')
+-- require("config.autocmds-after")
+
 
 require("config.keymaps")
 
